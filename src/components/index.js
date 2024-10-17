@@ -9,6 +9,9 @@ import Navbar from './Header/Navbar';
 import Sidebar from './Header/Sidebar';
 import EditAvatar from "./EditAvatar";
 import Input2 from "./Input2";
+import Spinner from "./Spinner";
+import UploadingVideo from "./UploadingVideo";
+import Like from './Like'
 
 export {
     Input,
@@ -21,5 +24,8 @@ export {
     NoVideosFound,
     Navbar,
     Sidebar,
-    EditAvatar
+    EditAvatar,
+    Spinner,
+    UploadingVideo,
+    Like
 }

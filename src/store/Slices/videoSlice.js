@@ -7,7 +7,7 @@ const API_URL = "http://localhost:8000/api/v1"
 const initialState = {
     loading: false,
     uploading: false,
-    upldoaded: false,
+    uploaded: false,
     videos: {
         docs: [],
         hasNextPage: false,
@@ -106,7 +106,7 @@ const videoSlice = createSlice({
     reducers: {
         updateUploadStatus: (state, action) => {
             state.uploading = false
-            state.upldoaded = false
+            state.uploaded = false
         },
         makeVideosNull: (state) => {
             state.videos.docs = [];
@@ -129,22 +129,22 @@ const videoSlice = createSlice({
         })
         .addCase(publishAVideo.fulfilled, (state, action) => {
             state.uploading = false
-            state.upldoaded = true
+            state.uploaded = true
         })
         .addCase(publishAVideo.rejected, (state) => {
             state.uploading = false
-            state.upldoaded = false
+            state.uploaded = false
         })
         .addCase(updateAVideo.pending, (state) => {
             state.uploading = true
         })
         .addCase(updateAVideo.fulfilled, (state, action) => {
             state.uploading = false
-            state.upldoaded = true
+            state.uploaded = true
         })
         .addCase(updateAVideo.rejected, (state) => {
             state.uploading = false
-            state.upldoaded = false
+            state.uploaded = false
         })
         .addCase(deleteAVideo.pending, (state) => {
             state.loading = true

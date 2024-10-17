@@ -21,11 +21,15 @@ import EditPersonalInfo from './components/EditPersonalInfo.jsx'
 import HeaderSection from './components/DashBoard/HeaderSection.jsx'
 import StatsSection from './components/DashBoard/StatsSection.jsx'
 import VideoTable from './components/DashBoard/VideoTable.jsx'
+import EditVideo from './components/EditVideo.jsx'
+import UploadingVideo from './components/UploadingVideo.jsx'
+import UploadVideo from './components/UploadVideo.jsx'
+import Description from './components/Description.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <VideoTable />
+    element: <Description />
   },
   {
     path: "/signup",
