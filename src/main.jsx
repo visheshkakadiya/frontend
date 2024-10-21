@@ -25,11 +25,12 @@ import EditVideo from './components/EditVideo.jsx'
 import UploadingVideo from './components/UploadingVideo.jsx'
 import UploadVideo from './components/UploadVideo.jsx'
 import Description from './components/Description.jsx'
+import CommentList from './components/CommentList.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Description />
+    element: <CommentList />
   },
   {
     path: "/signup",

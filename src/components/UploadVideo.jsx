@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 import ImagePreview from './ImagePreview'
 import { UploadingVideo, Button, Input2 } from './index'
 
-function UploadVideo({ uploadVideoPopUp }) {
+function UploadVideo({ setUploadVideoPopUp }) {
 
     const [videoName, setVideoName] = useState('');
     const [fileSize, setFileSize] = useState(0);

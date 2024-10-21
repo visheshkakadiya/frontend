@@ -12,6 +12,8 @@ import Input2 from "./Input2";
 import Spinner from "./Spinner";
 import UploadingVideo from "./UploadingVideo";
 import Like from './Like'
+import DeleteConfirmation from './deleteConfirmation'
+import Edit from "./Edit";
 
 export {
     Input,
@@ -27,5 +29,7 @@ export {
     EditAvatar,
     Spinner,
     UploadingVideo,
-    Like
+    Like,
+    DeleteConfirmation,
+    Edit
 }

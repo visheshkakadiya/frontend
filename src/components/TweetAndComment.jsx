@@ -15,7 +15,7 @@ function TweetAndComment({ comment, tweet, videoId }) {
             if (tweet) {
                 dispatch(createTweet(data));
             } else if (comment) {
-                dispatch(createAComment({ content: data.content, videoId }));
+                dispatch(createComment({ content: data.content, videoId }));
             }
             setValue("content", "");
         }
