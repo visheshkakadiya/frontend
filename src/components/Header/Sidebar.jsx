@@ -5,7 +5,6 @@ import { userLogout } from '../../store/Slices/authSlice.js';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { faHouse, faClockRotateLeft, faVideo, faUserCheck, faRightFromBracket, faGear } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp, faFolder } from '@fortawesome/free-regular-svg-icons';
-import { icon } from '@fortawesome/fontawesome-svg-core';
 
 
 function Sidebar() {

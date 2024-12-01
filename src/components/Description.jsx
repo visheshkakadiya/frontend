@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { toggleSubscription } from '../store/Slices/subscriptionSlice'
 import {Like, Button} from './index'
 import {timeAgo} from '../helper/Timeago'
@@ -13,7 +12,7 @@ function Description({
     createdAt,
     avatar,
     isSubscribed,
-    susbcribersCount,
+    subscribersCount,
     isLiked,
     likesCount,
     channelName,
@@ -22,7 +21,7 @@ function Description({
 }) {
 
     const [localIsSubscribed, setLocalIsSubscribed] = useState(isSubscribed)
-    const [loacalSubscribersCount, setLocalSubscribersCount] = useState(susbcribersCount)
+    const [loacalSubscribersCount, setLocalSubscribersCount] = useState(subscribersCount)
 
     const dispatch = useDispatch()
 
@@ -77,7 +76,6 @@ function Description({
                                     </p>
                                 </div>
                             </Link>
-                            <div onClick={handleSubscribe}>
                                 <Button
                                     onClick={handleSubscribe}
                                     className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500"
@@ -86,7 +84,6 @@ function Description({
                                         ? "Subscribed"
                                         : "Subscribe"}
                                 </Button>
-                            </div>
                         </div>
                     </div>
                 </div>

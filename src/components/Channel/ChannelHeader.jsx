@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleSubscription } from '../../store/Slices/subscriptionSlice'
 import { EditAvatar, Button } from '../index'
+import { getCurrentUser } from '../../store/Slices/authSlice'
 
 function ChannelHeader({
-    coverImage = "https://images.unsplash.com/photo-1597712903618-a9daae0496a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8&w=1000&q=80",
-    avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRyPsC-WOTRffoXvCe-VYnG_97c8b7qavsTA&s",
-    username = "username",
-    fullName = "fullName",
+    coverImage,
+    avatar,
+    username,
+    fullName,
     subscribersCount,
     subsribedCount,
     isSubscribed,
@@ -21,6 +22,12 @@ function ChannelHeader({
     const dispatch = useDispatch()
     const userProfile = useSelector((state) => state.user?.profileData?._id);
     const user = useSelector((state) => state.auth?.user?._id);
+
+    useEffect(() => {
+        if(!user){
+            dispatch(getCurrentUser())
+        }
+    }, [dispatch, user])
 
     useEffect(() => {
         setLocalIsSubscribed(isSubscribed)
@@ -45,7 +52,8 @@ function ChannelHeader({
                 {coverImage ? (
                     <div className='relative'>
                         <img src={coverImage}
-                            className='sm:h-40 h-28 w-full object-cover' />
+                            className='sm:h-40 h-28 w-full object-cover' 
+                            alt="coverImage"/>
 
                         {edit && (
                             <div className="absolute inset-0 flex justify-center items-center">
@@ -65,7 +73,8 @@ function ChannelHeader({
                 <div className='h-12'>
                     <div className='relative sm:w-32 w-28 sm:h-32 h-28'>
                         <img src={avatar}
-                            className="rounded-full sm:w-32 w-28 sm:h-32 h-28 object-cover absolute sm:bottom-10 bottom-20 outline-none" />
+                            className="rounded-full sm:w-32 w-28 sm:h-32 h-28 object-cover absolute sm:bottom-10 bottom-20 outline-none" 
+                            alt="avatar"/>
 
                         {edit && (
                             <div className="absolute inset-0 flex justify-center items-start">

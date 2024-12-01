@@ -28,7 +28,7 @@ function SignUp() {
             const loginResult = await dispatch(userLogin({ username, password }));
 
             if (loginResult?.type === "login/fulfilled") {
-                navigate("/terms");
+                navigate("/terms&conditions");
             } else {
                 navigate("/login");
             }

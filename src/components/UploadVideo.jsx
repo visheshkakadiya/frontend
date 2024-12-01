@@ -60,7 +60,7 @@ function UploadVideo({ setUploadVideoPopUp }) {
                             <FontAwesomeIcon
                                 icon={faCircleXmark}
                                 size="lg"
-                                onClick={() => setVideoPopUp((prev) => !prev)}
+                                onClick={() => setUploadVideoPopUp((prev) => !prev)}
                             />
                             <h3 className="font-semibold">Upload Videos</h3>
                         </div>

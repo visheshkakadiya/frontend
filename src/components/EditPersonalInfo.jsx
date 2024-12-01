@@ -21,8 +21,8 @@ function EditPersonalInfo() {
         setValue("email", auth?.email);
     }, [auth, setValue])
 
-    const saveChanges = async (data) => {
-        await dispatch(updateAccountDetails(data));
+    const saveChanges = (data) => {
+        dispatch(updateAccountDetails(data));
     }
 
     const reset = (e) => {

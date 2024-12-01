@@ -3,14 +3,14 @@ import { formatDuration, timeAgo } from '../helper/Timeago';
 import { useNavigate } from 'react-router-dom';
 
 function VideoList({
-    thumbnail = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRyPsC-WOTRffoXvCe-VYnG_97c8b7qavsTA&s",
-    title = "Video title",
-    duration = 1000,
-    createdAt = "2022-01-01",
+    thumbnail,
+    duration,
+    title,
     views = 0,
-    avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYPCkWOkCF3wrLkCCN02_IkJYF9bCuXsw9Gw&s",
+    avatar,
+    channelName,
+    createdAt,
     videoId,
-    channelName = "Channel Name",
 }) {
     const navigate = useNavigate();
 

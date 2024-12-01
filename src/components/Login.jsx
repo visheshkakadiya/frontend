@@ -21,13 +21,13 @@ function Login() {
     const submit = async (data) => {
         const isEmail = data.username.includes("@");
         const loginData = isEmail
-            ? { email: data.username, password: data.password } : data
+            ? { email: data.username, password: data.password }
+            : data;
 
-        const response = await dispatch(userLogin(loginData))
+        const response = await dispatch(userLogin(loginData));
         const user = await dispatch(getCurrentUser());
-
         if (user && response?.payload) {
-            navigate("/")
+            navigate("/");
         }
     };
 
@@ -39,12 +39,12 @@ function Login() {
         <div className='w-full  text-white p-3 flex justify-center items-start'>
             <div className='flex max-w-5xl flex-col space-y-5 justify-center items-center border border-slate-600 p-3 mt-20'>
                 <div className='flex items-center gap-2 mt-5 '>
-                    <Logo /> 
+                    <Logo />
                 </div>
 
-                <form 
-                className='space-y-5 p-2'
-                onSubmit={handleSubmit(submit)}>
+                <form
+                    className='space-y-5 p-2'
+                    onSubmit={handleSubmit(submit)}>
 
                     <Input
                         label="Username / email : "

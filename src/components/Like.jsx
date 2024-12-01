@@ -10,7 +10,6 @@ function Like({
     tweetId,
     videoId,
     commentId,
-    size,
 }) {
 
     const dispatch = useDispatch()
@@ -48,7 +47,7 @@ function Like({
         <div className="flex items-center gap-1">
             <FontAwesomeIcon
                 icon={faThumbsUp}
-                size={size}
+                size='1x'
                 className={`cursor-pointer ${
                     localIsLiked ? "text-purple-500" : ""
                 }`}

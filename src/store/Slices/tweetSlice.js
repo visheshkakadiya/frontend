@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { toast } from "react-toastify";
+import axiosInstance from "../../helper/axiosInstance.js";
+import { toast } from "react-hot-toast";
 
-const API_URL = "http://localhost:8000/api/v1";
 
 const initialState = {
     loading: false,
@@ -11,7 +10,7 @@ const initialState = {
 
 export const createTweet = createAsyncThunk("createTweet", async (content) => {
     try {
-        const response = await axios.post(`${API_URL}/tweet`, {content})
+        const response = await axiosInstance.post(`/tweet`, content)
         toast.success(response.data?.message)
         return response.data.data
     } catch (error) {
@@ -22,7 +21,7 @@ export const createTweet = createAsyncThunk("createTweet", async (content) => {
 
 export const editTweet = createAsyncThunk("editTweet", async ({content, tweetId}) => {
     try {
-        const response = await axios.put(`${API_URL}/tweet/${tweetId}`, {content})
+        const response = await axiosInstance.put(`/tweet/${tweetId}`, {content})
         toast.success(response.data?.message)
         return response.data.data
     } catch (error) {
@@ -33,7 +32,7 @@ export const editTweet = createAsyncThunk("editTweet", async ({content, tweetId}
 
 export const deleteTweet = createAsyncThunk("deleteTweet", async (tweetId) => {
     try {
-        const response = await axios.delete(`${API_URL}/tweet/${tweetId}`)
+        const response = await axiosInstance.delete(`/tweet/${tweetId}`)
         toast.success(response.data?.message)
         return response.data.data.tweetId
     } catch (error) {
@@ -44,7 +43,7 @@ export const deleteTweet = createAsyncThunk("deleteTweet", async (tweetId) => {
 
 export const getUserTweets = createAsyncThunk("getUserTweets", async (userId) => {
     try {
-        const response = await axios.get(`${API_URL}/tweet/user/${userId}`)
+        const response = await axiosInstance.get(`/tweet/user/${userId}`)
         return response.data.data
     } catch (error) {
         toast.error(error?.response?.data?.message || "Something went wrong.")

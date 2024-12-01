@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { toast } from "react-toastify";
+import axiosInstance from "../../helper/axiosInstance.js";
+import { toast } from "react-hot-toast";
 
-const API_URL = "http://localhost:8000/api/v1";
 
 const initialState = {
     loading: false,
@@ -13,7 +12,7 @@ const initialState = {
 
 export const toggleSubscription = createAsyncThunk("toggleSubscription", async (channelId) => {
     try {
-        const response = await axios.post(`${API_URL}/subscriptions/c/${channelId}`)
+        const response = await axiosInstance.post(`/subscriptions/c/${channelId}`)
         return response.data.data.subscribed
     } catch (error) {
         toast.error(error?.response?.data?.message || "Something went wrong.")
@@ -23,7 +22,7 @@ export const toggleSubscription = createAsyncThunk("toggleSubscription", async (
 
 export const getUserChannelSubscribers = createAsyncThunk("getUserChannelSubscribers", async (channelId) => {
     try {
-        const response = await axios.get(`${API_URL}/c/${channelId}`)
+        const response = await axiosInstance.get(`/subscriptions/c/${channelId}`)
         return response.data.data
     } catch (error) {
         toast.error(error?.response?.data?.message || "Something went wrong.")
@@ -33,7 +32,7 @@ export const getUserChannelSubscribers = createAsyncThunk("getUserChannelSubscri
 
 export const getSubscribedChannels = createAsyncThunk("getSubscribedChannels", async (subscriberId) => {
     try {
-        const response = await axios.get(`${API_URL}/subscriptions/u/${subscriberId}`)
+        const response = await axiosInstance.get(`/subscriptions/u/${subscriberId}`)
         return response.data.data
     } catch (error) {
         toast.error(error?.response?.data?.message || "Something went wrong.")
