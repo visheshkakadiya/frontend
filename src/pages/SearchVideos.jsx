@@ -13,7 +13,7 @@ function SearchVideos() {
     const dispatch = useDispatch()
     const videos = useSelector(state => state.video?.videos)
     const loading = useSelector(state => state.video?.loading)
-    const query = useParams()
+    const { query } = useParams()
     const [filterOpen, setFilterOpen] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -64,76 +64,81 @@ function SearchVideos() {
                                 className="absolute right-5 top-5 cursor-pointer"
                                 onClick={() => setFilterOpen((prev) => !prev)}
                             />
-                            <table className='mt-4'>
-                                <tr className="w-full text-start border-b">
-                                    <th>SortBy</th>
-                                </tr>
-                                <tr className="flex flex-col gap-2 text-slate-400 cursor-pointer">
-                                    <td
-                                        onClick={() => handleSortParams("createdAt", "desc")}
-                                    >
-                                        Upload date{" "}
-                                        <span className="text-xs">
-                                            (Latest)
-                                        </span>
-                                    </td>
-                                    <td
-                                        onClick={() =>
-                                            handleSortParams("createdAt", "asc")
-                                        }
-                                    >
-                                        Upload date{" "}
-                                        <span className="text-xs">
-                                            (Oldest)
-                                        </span>
-                                    </td>
-                                    <td
-                                        onClick={() =>
-                                            handleSortParams("views", "asc")
-                                        }
-                                    >
-                                        View count{" "}
-                                        <span className="text-xs">
-                                            (Low to High)
-                                        </span>
-                                    </td>
-                                    <td
-                                        onClick={() =>
-                                            handleSortParams("views", "desc")
-                                        }
-                                    >
-                                        View count{" "}
-                                        <span className="text-xs">
-                                            (High to Low)
-                                        </span>
-                                    </td>
-                                    <td
-                                        onClick={() =>
-                                            handleSortParams("duration", "asc")
-                                        }
-                                    >
-                                        Duration{" "}
-                                        <span className="text-xs">
-                                            (Low to High)
-                                        </span>
-                                    </td>
-                                    <td
-                                        onClick={() =>
-                                            handleSortParams("duration", "desc")
-                                        }
-                                    >
-                                        Duration{" "}
-                                        <span className="text-xs">
-                                            (High to Low)
-                                        </span>
-                                    </td>
-                                </tr>
+                            <table className="mt-4">
+                                <thead>
+                                    <tr className="w-full text-start border-b">
+                                        <th>SortBy</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr className="flex flex-col gap-2 text-slate-400 cursor-pointer">
+                                        <td
+                                            onClick={() => handleSortParams("createdAt", "desc")}
+                                        >
+                                            Upload date{" "}
+                                            <span className="text-xs">
+                                                (Latest)
+                                            </span>
+                                        </td>
+                                        <td
+                                            onClick={() =>
+                                                handleSortParams("createdAt", "asc")
+                                            }
+                                        >
+                                            Upload date{" "}
+                                            <span className="text-xs">
+                                                (Oldest)
+                                            </span>
+                                        </td>
+                                        <td
+                                            onClick={() =>
+                                                handleSortParams("views", "asc")
+                                            }
+                                        >
+                                            View count{" "}
+                                            <span className="text-xs">
+                                                (Low to High)
+                                            </span>
+                                        </td>
+                                        <td
+                                            onClick={() =>
+                                                handleSortParams("views", "desc")
+                                            }
+                                        >
+                                            View count{" "}
+                                            <span className="text-xs">
+                                                (High to Low)
+                                            </span>
+                                        </td>
+                                        <td
+                                            onClick={() =>
+                                                handleSortParams("duration", "asc")
+                                            }
+                                        >
+                                            Duration{" "}
+                                            <span className="text-xs">
+                                                (Low to High)
+                                            </span>
+                                        </td>
+                                        <td
+                                            onClick={() =>
+                                                handleSortParams("duration", "desc")
+                                            }
+                                        >
+                                            Duration{" "}
+                                            <span className="text-xs">
+                                                (High to Low)
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
+
                         </div>
                     </div>
                 )}
                 <div className="grid h-screen xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-white overflow-y-scroll">
-                    {videos && 
+                    {videos &&
                         videos?.docs?.map((video) => (
                             <VideoList
                                 key={video?._id}

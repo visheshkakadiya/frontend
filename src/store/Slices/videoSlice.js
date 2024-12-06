@@ -20,6 +20,7 @@ export const getAllVideos = createAsyncThunk("getAllVideos", async ({userId, pag
     try {
         const url = new URL(`${BASE_URL}/video`)
 
+        const params = new URLSearchParams();
         if(userId) url.searchParams.set("userId", userId)
         if(page) url.searchParams.set("page", page)
         if(limit) url.searchParams.set("limit", limit)
@@ -28,7 +29,7 @@ export const getAllVideos = createAsyncThunk("getAllVideos", async ({userId, pag
             url.searchParams.set("sortBy", sortBy)
             url.searchParams.set("sortType", sortType)
         }
-
+        
         const response = await axiosInstance.get(url)
         return response.data.data
     } catch (error) {
@@ -61,9 +62,9 @@ export const updateAVideo = createAsyncThunk("updateAvideo", async ({data, video
     formData.append("thumbnail", data.thumbnail[0]);
 
     try {
-        const reaponse = await axiosInstance.patch(`/video/v/${videoId}`, formData)
-        toast.success(reaponse?.data?.message)
-        return reaponse.data.data
+        const response = await axiosInstance.patch(`/video/v/${videoId}`, formData)
+        toast.success(response?.data?.message)
+        return response.data.data
     } catch (error) {
         toast.error(error.response?.data?.message || "Something went wrong.")
         throw error
@@ -94,6 +95,9 @@ export const getVideoById = createAsyncThunk("getVideoById", async ({videoId}) =
 export const togglePublishStatus = createAsyncThunk("togglePublishStatus", async (videoId) => {
     try {
         const response = await axiosInstance.patch(`/video/toggle/publish/${videoId}`)
+        
+        toast.success(response.data.message);
+        return response.data.data.isPublished;
     } catch (error) {
         toast.error(error.response?.data?.message || "Something went wrong.")
         throw error
@@ -118,7 +122,12 @@ const videoSlice = createSlice({
         })
         builder.addCase(getAllVideos.fulfilled, (state, action) => {
             state.loading = false;
-            state.videos.docs = [...state.videos.docs, ...action.payload.docs];
+            state.videos.docs = [
+                ...new Map(
+                    [...state.videos.docs, ...action.payload.docs].map(video => [video._id, video])
+                ).values()
+            ];
+            
             state.videos.hasNextPage = action.payload.hasNextPage;
         })
         builder.addCase(getAllVideos.rejected, (state) => {
@@ -139,9 +148,19 @@ const videoSlice = createSlice({
             state.uploading = true
         })
         builder.addCase(updateAVideo.fulfilled, (state, action) => {
-            state.uploading = false
-            state.uploaded = true
-        })
+            state.uploading = false;
+            state.uploaded = true;
+        
+            // Find and update the video in the list
+            const index = state.videos.docs.findIndex(video => video._id === action.payload._id);
+            if (index !== -1) {
+                state.videos.docs[index] = {
+                    ...state.videos[index],
+                    ...action.payload
+                }
+            }
+        });
+        
         builder.addCase(updateAVideo.rejected, (state) => {
             state.uploading = false
             state.uploaded = false

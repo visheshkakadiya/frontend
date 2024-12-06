@@ -5,7 +5,7 @@ import { faTrashCan, faPencil } from '@fortawesome/free-solid-svg-icons'
 
 function VideoTable({ videos, setPopUp, setVideoDetails }) {
     return (
-        <section className='mx-auto w-full overflow-x-scroll'>
+        <section className='mx-auto w-full'>
             <table className='min-w-full border border-slate-500'>
                 <thead className='text-white'>
                     <tr>

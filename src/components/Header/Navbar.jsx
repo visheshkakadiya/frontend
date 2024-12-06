@@ -5,7 +5,7 @@ import { NavLink, useNavigate, Link } from 'react-router-dom'
 import { userLogout } from '../../store/Slices/authSlice.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleXmark, faThumbsUp } from '@fortawesome/free-regular-svg-icons'
-import { faVideo, faMagnifyingGlass, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faVideo, faMagnifyingGlass, faBars, faArrowRightFromBracket, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 function Navbar() {
 
@@ -139,10 +139,12 @@ function Navbar() {
                                     </div>
                                 ) : (
                                     <div
-                                        className="flex gap-2 justify-start items-start cursor-pointer py-1 px-2 border border-slate-600"
+                                        className="flex gap-2 justify-start items-start cursor-pointer py-1 px-2 border border-slate-600 mt-[550px]"
                                         onClick={() => logout()}
                                     >
-                                        <IoMdLogOut size={25} />
+                                        <FontAwesomeIcon 
+                                            icon={faRightFromBracket}
+                                        />
                                         <span className="text-base">Logout</span>
                                     </div>
                                 )}

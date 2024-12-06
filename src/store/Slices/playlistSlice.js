@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 
 const initialState = {
     loading: false,
-    playlist: [],
+    playlist: {videos: []},
     playlists: [],
 }
 
@@ -37,7 +37,7 @@ export const addVideoToPlaylist = createAsyncThunk("addVideoToPlaylist", async (
 
 export const removeVideoFromPlaylist = createAsyncThunk(
     "removeVideoFromPlaylist",
-    async (playlistId, videoId) => {
+    async ({playlistId, videoId}) => {
         try {
             const response = await axiosInstance.patch(
                 `/playlist/remove/${videoId}/${playlistId}`
@@ -83,11 +83,16 @@ export const getPlaylistsByUser = createAsyncThunk(
 
 export const upadtePlaylist = createAsyncThunk(
     "upadtePlaylist",
-    async ({ playlistId, name, description }) => {
+    async ({ playlistId, data}) => {
+
+        const formData = new FormData();
+        formData.append("name", data.name);
+        formData.append("description", data.description);
+
         try {
             const response = await axiosInstance.patch(
                 `/playlist/${playlistId}`,
-                { name, description }
+                formData
             );
             if (response.data.success) {
                 toast.success(response.data.message);
@@ -100,9 +105,10 @@ export const upadtePlaylist = createAsyncThunk(
     }
 );
 
-export const deletePlaylist = createAsyncThunk("deletePlaylist", async ({ playlistId }) => {
+export const deletePlaylist = createAsyncThunk("deletePlaylist", async (playlistId) => {
     try {
         const response = await axiosInstance.delete(`/playlist/${playlistId}`);
+        toast.success(response?.data?.message)
         return response.data.data;
     } catch (error) {
         toast.error(error?.response?.data?.message || "Something went wrong.")
@@ -144,6 +150,34 @@ const playlistSlice = createSlice({
             state.loading = false;
             state.playlist = action.payload;
         })
+        builder.addCase(upadtePlaylist.pending, (state) => {
+            state.loading = true;
+        })
+        builder.addCase(upadtePlaylist.fulfilled, (state, action) => {
+            state.loading = false;
+        
+            // Find the playlist to update in the array
+            const playlistIndex = state.playlists.findIndex(
+                (playlist) => playlist._id === action.payload._id
+            );
+        
+            if (playlistIndex !== -1) {
+                // Merge existing playlist details with updated data
+                state.playlists[playlistIndex] = {
+                    ...state.playlists[playlistIndex],
+                    ...action.payload,
+                };
+            }
+        
+            // Update the currently loaded playlist if it's the one being edited
+            if (state.playlist._id === action.payload._id) {
+                state.playlist = {
+                    ...state.playlist,
+                    ...action.payload,
+                };
+            }
+        });
+        
         builder.addCase(removeVideoFromPlaylist.pending, (state) => {
             state.loading = true;
         })

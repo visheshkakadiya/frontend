@@ -1,6 +1,10 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { timeAgo, formatDuration } from "../helper/Timeago";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { removeVideoFromPlaylist, getPlaylistById } from "../store/Slices/playlistSlice";
 
 function Playlist({
   title,
@@ -12,8 +16,30 @@ function Playlist({
   videoId,
   avatar,
   duration,
+  playlistId
 }) {
   const navigate = useNavigate();
+  const authUsername = useSelector((state) => state.auth?.user?.username);
+  const username = useSelector((state) => state.user?.profileData?.username);
+  const dispatch = useDispatch();
+  const [editPlaylist, setEditPlaylist] = useState({
+    removing: false,
+    isOpen: false,
+  });
+
+  const handleRemoveVideo = () => {
+    setEditPlaylist((prevState) => ({ ...prevState, removing: true }));
+    dispatch(removeVideoFromPlaylist({ playlistId, videoId }))
+        .unwrap()
+        .then(() => {
+            // Re-fetch the updated playlist to reflect the changes
+            dispatch(getPlaylistById(playlistId));
+            setEditPlaylist((prevState) => ({ ...prevState, removing: false, isOpen: false }));
+        })
+};
+
+  // console.log("playlistId: ", playlistId);
+  // console.log("videoId: ", videoId);
 
   const handleAvatarClick = (e) => {
     e.stopPropagation();
@@ -22,6 +48,14 @@ function Playlist({
 
   const handleVideoClick = () => {
     navigate(`/watch/${videoId}`);
+  };
+
+  const toggleOptions = (e) => {
+    e.stopPropagation();
+    setEditPlaylist((prevState) => ({
+      ...prevState,
+      isOpen: !prevState.isOpen,
+    }));
   };
 
   return (
@@ -58,6 +92,33 @@ function Playlist({
           <span className="text-md text-gray-400 font-medium">{channelName}</span>
         </div>
       </div>
+
+      {/* Options */}
+      {authUsername === username && (
+        <div className="relative">
+          <FontAwesomeIcon
+            icon={faEllipsisVertical}
+            className="text-white cursor-pointer w-6"
+            onClick={toggleOptions}
+          />
+
+          {editPlaylist.isOpen && (
+            <div className="absolute right-0 mt-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg p-2 z-10">
+              <ul>
+                <li
+                  className="hover:bg-gray-700 px-4 py-2 cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRemoveVideo();
+                  }}
+                >
+                  {editPlaylist.removing ? "Removing..." : "Remove"}
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

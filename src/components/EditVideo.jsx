@@ -37,14 +37,15 @@ function EditVideo({
     };
 
     const updateVideo = async (data) => {
-        await dispatch(updateAVideo(videoId, data))
+        const result = await dispatch(updateAVideo({ videoId, data }));
+
         setEditVideoPopup((prev) => ({
             ...prev,
             uploadVideo: false,
             editVideo: false,
         }));
-        dispatch(updateUploadStatus())
-    }
+        dispatch(updateUploadStatus());
+    };
 
     useEffect(() => {
         setValue("title", title)
@@ -86,7 +87,7 @@ function EditVideo({
                     <div className='p-2 grid lg:grid-cols-2 grid-cols-1 gap-5 z-40'>
                         <div>
                             <ImagePreview
-                                name="coverImage"
+                                name="thumbnail"
                                 control={control}
                                 className={
                                     "object-contain w-full min-w-xl h-72 min-h-32"

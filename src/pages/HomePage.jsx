@@ -14,7 +14,7 @@ function HomePage() {
     const [page, setPage] = useState(1)
 
     useEffect(() => {
-        dispatch(getAllVideos({}))
+        dispatch(getAllVideos({ page: 1, limit: 10 }))
 
         return () => dispatch(makeVideosNull())
     }, [dispatch])

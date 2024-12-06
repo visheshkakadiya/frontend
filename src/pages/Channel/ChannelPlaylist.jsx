@@ -30,6 +30,13 @@ function ChannelPlaylist() {
         return() => dispatch(makePlaylistNull())
     }, [dispatch, userId]);
 
+    useEffect(() => {
+        if (userId) {
+            dispatch(getPlaylistsByUser(userId)); // Refetch playlists for the user
+        }
+    }, [dispatch, userId]);
+    
+
     const createPlaylist = (data) => {
         dispatch(createAPlaylist(data));
         setOpenCreatePlaylist((prev) => !prev);

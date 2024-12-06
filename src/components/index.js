@@ -38,6 +38,8 @@ import AuthLayout from "./AuthLayout";
 import SearchforSmallScreen from "./SearchforSmallScreen";
 import InfiniteScroll from './InfiniteScroll'
 import Playlist from "./Playlist";
+import EditPlaylist from "./EditPlaylist";
+import VideoSuggestions from "./VideoSuggestions";
 
 export {
     Button,
@@ -79,5 +81,7 @@ export {
     AuthLayout,
     SearchforSmallScreen,
     InfiniteScroll,
-    Playlist
+    Playlist,
+    EditPlaylist,
+    VideoSuggestions
 };
