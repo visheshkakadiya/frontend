@@ -147,6 +147,7 @@ function VideoDetails() {
             {shuffledVideos?.map((video) => (
               <VideoSuggestions
                 key={video._id}
+                videoId={video._id}
                 title={video.title}
                 thumbnail={video.thumbnail.url}
                 duration={video.duration}

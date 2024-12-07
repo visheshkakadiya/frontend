@@ -22,7 +22,7 @@ function MySubscriptions() {
                 {subscriptions?.map((subscription) => (
                     <div
                         key={subscription?.subscribedChannel?._id}
-                        className="flex flex-col items-center overflow-x-scroll"
+                        className="flex flex-col items-center"
                     >
                         <Avatar
                             src={subscription?.subscribedChannel?.avatar?.url}
@@ -35,7 +35,7 @@ function MySubscriptions() {
                 ))}
             </div>
 
-            <div className="text-white mb-20 sm:mb-0 w-full grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 overflow-y-scroll">
+            <div className="text-white mb-20 sm:mb-0 w-full grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1">
                 {subscriptions?.map((subscription) => (
                     <Link
                         to={`/watch/${subscription?.subscribedChannel?.latestVideo?._id}`}
