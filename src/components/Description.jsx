@@ -77,15 +77,21 @@ function Description({
                             {listOpen && (
                                 <div className="absolute left-0 bg-gray-800 rounded-lg shadow-md mt-2 z-10">
                                     <ul className="py-2">
-                                        {playlists?.map((playlist) => (
-                                            <li
-                                                key={playlist?._id}
-                                                className="hover:bg-gray-700 px-4 py-2 cursor-pointer"
-                                                onClick={() => handleAddVideo(playlist._id)}
-                                            >
-                                                {playlist?.name}
+                                        {playlists?.length > 0 ? (
+                                            playlists?.map((playlist) => (
+                                                <li
+                                                    key={playlist?._id}
+                                                    className="hover:bg-gray-700 px-4 py-2 cursor-pointer"
+                                                    onClick={() => handleAddVideo(playlist._id)}
+                                                >
+                                                    {playlist?.name}
+                                                </li>
+                                            ))
+                                        ) : (
+                                            <li className="px-4 py-2 text-slate-400 cursor-default">
+                                                No playlists available
                                             </li>
-                                        ))}
+                                        )}
                                     </ul>
                                 </div>
                             )}
