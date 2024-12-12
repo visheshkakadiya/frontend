@@ -37,7 +37,9 @@ function HomePage() {
                     fetchMore={fetchMoreVideos}
                     hasNextPage={hasNextPage}
                 >
-                    <div className="text-white mb-20 sm:m-0 max-h-screen w-full grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1" style={{ overflow: 'overlay' display: 'none'}}>
+                    <div className="text-white mb-20 sm:m-0 max-h-screen w-full grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 hide-scrollbar"
+                        style={{ overflow: 'overlay' }}
+                    >
                         {videos?.map((video) => (
                             <VideoList
                                 key={video._id}
