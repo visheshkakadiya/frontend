@@ -50,7 +50,7 @@ export const getVideoComments = createAsyncThunk("getVideoComments", async ({ vi
     if (limit) url.searchParams.set("limit", limit)
 
     try {
-        const response = await axiosInstance.get(url)
+        const response = await axiosInstance.get(url.toString())
         return response.data.data
     } catch (error) {
         toast.error(error?.response?.data?.message || "Something went wrong.")
