@@ -36,14 +36,19 @@ function Login() {
     }
 
     return (
-        <div className='w-full  text-white p-3 flex justify-center items-start'>
-            <div className='flex max-w-5xl flex-col space-y-5 justify-center items-center border border-slate-600 p-3 mt-20'>
-                <div className='flex items-center gap-2 mt-5 '>
+        <div className='w-full min-h-screen flex justify-center items-center px-4 py-12 bg-dark-900'>
+            {/* Ambient Background Glows */}
+            <div className='absolute top-[20%] left-[30%] w-96 h-96 bg-primary-500/20 rounded-full blur-[100px] pointer-events-none'></div>
+            <div className='absolute bottom-[20%] right-[30%] w-96 h-96 bg-secondary-500/20 rounded-full blur-[100px] pointer-events-none'></div>
+            
+            <div className='relative z-10 flex w-full max-w-md flex-col justify-center items-center border border-white/10 bg-dark-800/40 backdrop-blur-2xl rounded-3xl p-8 sm:p-10 shadow-card'>
+                <div className='flex items-center gap-2 mb-2'>
                     <Logo />
                 </div>
+                <p className='text-dark-300 font-medium mb-6 text-sm text-center'>Sign in to continue to YouTube</p>
 
                 <form
-                    className='space-y-5 p-2'
+                    className='space-y-5 w-full'
                     onSubmit={handleSubmit(submit)}>
 
                     <Input

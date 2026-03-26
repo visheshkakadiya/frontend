@@ -20,7 +20,6 @@ export const getAllVideos = createAsyncThunk("getAllVideos", async ({userId, pag
     try {
         const url = new URL(`${BASE_URL}/video`)
 
-        const params = new URLSearchParams();
         if(userId) url.searchParams.set("userId", userId)
         if(page) url.searchParams.set("page", page)
         if(limit) url.searchParams.set("limit", limit)
@@ -30,7 +29,7 @@ export const getAllVideos = createAsyncThunk("getAllVideos", async ({userId, pag
             url.searchParams.set("sortType", sortType)
         }
         
-        const response = await axiosInstance.get(url)
+        const response = await axiosInstance.get(url.toString())
         return response.data.data
     } catch (error) {
         toast.error(error.response?.data?.message || "Something went wrong.")

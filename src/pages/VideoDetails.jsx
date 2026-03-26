@@ -87,9 +87,9 @@ function VideoDetails() {
       <Navbar />
 
       {/* Main Content */}
-      <div className="flex flex-col lg:flex-row px-3 sm:px-5 mt-5">
+      <div className="flex flex-col lg:flex-row px-4 sm:px-6 lg:px-8 xl:px-12 mt-6 lg:mt-8 gap-6 lg:gap-10 max-w-[1600px] mx-auto pb-20">
         {/* Main Video Section */}
-        <div className="lg:w-2/3 w-full">
+        <div className="lg:w-[70%] w-full">
           <Video
             src={video?.videoFile?.url}
             poster={video?.thumbnail?.url}
@@ -110,7 +110,7 @@ function VideoDetails() {
             channelId={video?.owner?._id}
             playlistId={currentPlaylist?._id}
           />
-          <div className="text-white font-semibold mt-5">
+          <div className="text-white font-bold text-xl tracking-tight mt-8 mb-6">
             {totalComments} Comments
           </div>
           <TweetAndComment comment={true} videoId={video?._id} />
@@ -139,8 +139,8 @@ function VideoDetails() {
         </div>
 
         {/* Suggested Videos Section */}
-        <div className="lg:w-1/3 w-full lg:pl-5 mt-8 lg:mt-0">
-          <h2 className="text-lg font-semibold text-white mb-4">
+        <div className="lg:w-[30%] w-full flex-shrink-0 mt-8 lg:mt-0">
+          <h2 className="text-xl font-bold text-white mb-6 tracking-tight">
             Suggested Videos
           </h2>
           <div className="space-y-4">

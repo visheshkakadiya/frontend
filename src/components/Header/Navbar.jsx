@@ -38,7 +38,7 @@ function Navbar() {
 
     return (
         <>
-            <nav className='w-full bg-[#0E0F0F] flex justify-between items-center p-4 sm:gap-5 gap-2 border-b-2 border-gray-500 sticky top-0 z-50'>
+            <nav className='w-full bg-dark-900/80 backdrop-blur-lg flex justify-between items-center p-4 sm:gap-5 gap-2 border-b border-white/10 sticky top-0 z-50 shadow-sm'>
                 <div className='flex items-center justify-center gap-2 cursor-pointer'>
                     <Logo />
                 </div>
@@ -68,14 +68,14 @@ function Navbar() {
                             className='rounded-full w-10 h-10 object-cover' />
                     </div>
                 ) : (
-                    <div className='space-x-2 sm:block hidden'>
+                    <div className='space-x-3 sm:block hidden'>
                         <Link to={"/login"}>
-                            <Button className="bg-[#222222] border hover:bg-black border-slate-500 sm:px-4 sm:py-2 p-2 ">
+                            <Button className="bg-dark-800 border border-dark-600 hover:bg-dark-700 hover:text-white sm:px-4 sm:py-2 p-2">
                                 Login
                             </Button>
                         </Link>
                         <Link to={"/signup"}>
-                            <Button className="font-semibold border hover:bg-[#222222] border-slate-500 sm:px-4 sm:py-2">
+                            <Button className="bg-primary-500 hover:bg-primary-600 text-white font-semibold sm:px-4 sm:py-2 shadow-glow">
                                 Sign up
                             </Button>
                         </Link>
@@ -92,8 +92,8 @@ function Navbar() {
 
                 {/* Side bar for smaller screens */}
                 {toggleMenu && (
-                    <div className='fixed right-0 top-0 text-white flex flex-col border-l h-screen w-[70%] bg-[#0F0F0F] sm:hidden rounded-lg outline-none'>
-                        <div className='w-full border-b h-20 flex items-center mb-2 justify-between px-3'>
+                    <div className='fixed right-0 top-0 text-white flex flex-col border-l border-white/10 h-screen w-[75%] sm:w-[400px] bg-dark-900/95 backdrop-blur-xl sm:hidden rounded-l-2xl shadow-2xl outline-none z-50 transition-transform'>
+                        <div className='w-full border-b border-white/5 h-20 flex items-center mb-2 justify-between px-4'>
                             <div className='flex items-center gap-2'>
                                 <Logo />
                             </div>
@@ -123,23 +123,23 @@ function Navbar() {
                                 ))}
                             </div>
 
-                            <div className='flex flex-col justify-between min-h-[63vh]'>
+                            <div className='flex flex-col justify-between min-h-[63vh] px-2'>
                                 {!authStatus ? (
-                                    <div className="flex flex-col space-y-5 mb-3 mt-auto">
+                                    <div className="flex flex-col space-y-4 mb-4 mt-auto">
                                         <Link to={"/login"}>
-                                            <Button className="w-full bg-[#222222] border hover:bg-white hover:text-black border-slate-500 py-1 px-3">
+                                            <Button className="w-full bg-dark-800 border border-dark-600 hover:bg-dark-700 hover:text-white py-2 px-4 shadow-sm">
                                                 Login
                                             </Button>
                                         </Link>
                                         <Link to={"/signup"}>
-                                            <Button className=" w-full font-semibold border border-slate-500 hover:bg-white hover:text-black py-1 px-3">
+                                            <Button className="w-full bg-primary-500 hover:bg-primary-600 font-semibold py-2 px-4 shadow-glow">
                                                 Sign up
                                             </Button>
                                         </Link>
                                     </div>
                                 ) : (
                                     <div
-                                        className="flex gap-2 justify-start items-start cursor-pointer py-1 px-2 border border-slate-600 mt-[550px]"
+                                        className="flex gap-3 justify-start items-center cursor-pointer py-3 px-4 rounded-xl border border-white/10 hover:bg-red-500/10 hover:text-red-400 hover:border-red-500/30 transition-all duration-300 mt-auto mb-4"
                                         onClick={() => logout()}
                                     >
                                         <FontAwesomeIcon 
